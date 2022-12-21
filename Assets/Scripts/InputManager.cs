@@ -12,10 +12,15 @@ public class InputManager : MonoBehaviour
 
     void Awake()
     {
-        onEnable();
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
         motor = GetComponent<PlayerMotor>();
+        onFoot.Jump.performed += ctx => motor.Jump();
+    }
+
+    void Start()
+    {
+        onEnable();
     }
 
     void FixedUpdate()
