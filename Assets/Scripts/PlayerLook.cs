@@ -19,7 +19,7 @@ public class PlayerLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
         cam.transform.eulerAngles = new Vector3(xRotation, cam.transform.eulerAngles.y, 0f);
-        playerHands.transform.eulerAngles = new Vector3(xRotation, cam.transform.eulerAngles.y, 0f);
+
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
     }
 }
