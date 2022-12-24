@@ -8,42 +8,42 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private float timeBetweenSpawns = 0.5f;
-    private float timer = 0f;
     [SerializeField] private int enemiesPerWave = 10;
     private int enemiesSpawned = 0;
     private int currentWave = 0;
-
+    private float waveTimer = 10f;
     private UIManager uiManager;
+
+    private bool waveStarted;
+
+    public bool WaveStarted
+    {
+        get => waveStarted;
+        set => waveStarted = value;
+    }
 
     void Start()
     {
         uiManager = GetComponent<UIManager>();
-        StartCoroutine(StartNextWave());
+        uiManager.SetWaveText(currentWave);
     }
 
     void Update()
     {
-        UpdateTimer();
+        if (waveStarted)
+        {
+            UpdateWaveTimer();
+        }
     }
 
-    IEnumerator StartNextWave()
+    public IEnumerator StartNextWave()
     {
         currentWave++;
         uiManager.SetWaveText(currentWave);
         enemiesSpawned = 0;
-        timer = timeBetweenWaves;
-        uiManager.SetWaveTimerText(currentWave, timer);
+        waveTimer = timeBetweenWaves;
         yield return new WaitForSeconds(timeBetweenWaves);
         StartCoroutine(SpawnEnemies());
-    }
-
-    void UpdateTimer()
-    {
-        if (timer >= 0)
-        {
-            timer -= Time.deltaTime;
-        }
-        uiManager.SetWaveTimerText(currentWave, Mathf.RoundToInt(timer));
     }
 
     IEnumerator SpawnEnemies()
@@ -57,5 +57,14 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
         StartCoroutine(StartNextWave());
+    }
+
+    void UpdateWaveTimer()
+    {
+        if (waveTimer >= 0 && waveStarted)
+        {
+            waveTimer -= Time.deltaTime;
+            uiManager.SetWaveTimerText(Mathf.RoundToInt(waveTimer));
+        }
     }
 }

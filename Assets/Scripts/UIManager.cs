@@ -32,11 +32,18 @@ public class UIManager : MonoBehaviour
 
     public void SetWaveText(int wave)
     {
-        waveText.GetComponent<TMPro.TextMeshProUGUI>().text = "Wave " + wave;
+        if (wave == 0)
+        {
+            waveText.GetComponent<TMPro.TextMeshProUGUI>().text = "Prepare";
+        }
+        else
+        {
+            waveText.GetComponent<TMPro.TextMeshProUGUI>().text = "Wave " + wave;
+        }
     }
 
-    public void SetWaveTimerText(int wave, float time)
+    public void SetWaveTimerText(float time)
     {
-        waveTimer.GetComponent<TMPro.TextMeshProUGUI>().text = "Wave " + (wave + 1) + " starting in " + time + " seconds";
+        waveTimer.GetComponent<TMPro.TextMeshProUGUI>().text = time.ToString();
     }
 }

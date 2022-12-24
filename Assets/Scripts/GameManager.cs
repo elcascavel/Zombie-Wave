@@ -10,14 +10,48 @@ public class GameManager : MonoBehaviour
 
     private UIManager uiManager;
 
+    private WaveManager waveManager;
+
+    private bool gameStarted;
+
+    private float gamePreparationTime = 2f;
+
     void Start()
     {
         uiManager = GetComponent<UIManager>();
+        waveManager = GetComponent<WaveManager>();
         playerStats = player.GetComponent<PlayerStats>();
+    }
+
+    void StartGame()
+    {
+        gameStarted = true;
+        uiManager.ShowWaveText();
+        uiManager.SetWaveText(0);
+        StartCoroutine(waveManager.StartNextWave());
+        waveManager.WaveStarted = true;
+    }
+
+    bool UpdateGamePreparationTime()
+    {
+        if (gamePreparationTime >= 0)
+        {
+            gamePreparationTime -= Time.deltaTime;
+            uiManager.SetWaveTimerText(Mathf.RoundToInt(gamePreparationTime));
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     void Update()
     {
+        if (UpdateGamePreparationTime() && !gameStarted)
+        {
+            StartGame();
+        }
         uiManager.HealthBar.SetHealth(playerStats.CurrentHealth);
     }
 }
