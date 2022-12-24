@@ -7,8 +7,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject wavePanel;
     [SerializeField] private GameObject waveText;
     [SerializeField] private GameObject waveTimer;
-
+    [SerializeField] private Healthbar healthBar;
     private WaveManager waveManager;
+
+    public Healthbar HealthBar
+    {
+        get { return healthBar; }
+    }
+
+    void Start()
+    {
+        waveManager = GetComponent<WaveManager>();
+    }
 
     public void ShowWaveText()
     {

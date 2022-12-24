@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public GameObject[] enemies;
-    public Transform[] spawnPoints;
-    public float timeBetweenWaves = 5f;
-    public float timeBetweenSpawns = 0.5f;
+    [SerializeField] private GameObject[] enemies;
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private float timeBetweenWaves = 5f;
+    [SerializeField] private float timeBetweenSpawns = 0.5f;
     private float timer = 0f;
-    public int enemiesPerWave = 10;
+    [SerializeField] private int enemiesPerWave = 10;
     private int enemiesSpawned = 0;
     private int currentWave = 0;
 
