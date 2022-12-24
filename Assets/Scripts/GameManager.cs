@@ -16,7 +16,12 @@ public class GameManager : MonoBehaviour
 
     private float gamePreparationTime = 2f;
 
-    void Start()
+    public GameObject Player
+    {
+        get { return player; }
+    }
+
+    void Awake()
     {
         uiManager = GetComponent<UIManager>();
         waveManager = GetComponent<WaveManager>();

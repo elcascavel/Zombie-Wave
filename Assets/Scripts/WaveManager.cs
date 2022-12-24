@@ -5,6 +5,8 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemies;
+    [SerializeField] private List<GameObject> spawnedEnemies;
+    [SerializeField] private Transform player;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private float timeBetweenSpawns = 0.5f;
@@ -48,12 +50,15 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        while (enemiesSpawned < enemiesPerWave)
+        for (int i = 0; i < enemiesPerWave; i++)
         {
             enemiesSpawned++;
             int randomEnemy = Random.Range(0, enemies.Length);
             int randomSpawnPoint = Random.Range(0, spawnPoints.Length);
-            Instantiate(enemies[randomEnemy], spawnPoints[randomSpawnPoint].position, Quaternion.identity);
+
+            spawnedEnemies.Add(Instantiate(enemies[randomEnemy], spawnPoints[randomSpawnPoint].position, Quaternion.identity));
+            spawnedEnemies[i].GetComponent<ZombieNavMesh>().Player = player;
+
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
         StartCoroutine(StartNextWave());
