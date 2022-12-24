@@ -5,15 +5,16 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 100;
-    [SerializeField] private float currentHealth;
+    [SerializeField] private float currentHealth = 100;
 
     public float CurrentHealth
     {
-        get; private set;
+        get => currentHealth;
     }
 
     private void Start()
     {
-        CurrentHealth = maxHealth;
+        currentHealth = maxHealth;
+        Debug.Log(CurrentHealth);
     }
 }
