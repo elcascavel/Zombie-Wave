@@ -15,6 +15,5 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        Debug.Log(CurrentHealth);
     }
 }
