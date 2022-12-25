@@ -7,6 +7,7 @@ public class ZombieNavMesh : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     [SerializeField] private Transform player = null;
+    [SerializeField] private Animator animator = null;
 
     public Transform Player
     {
@@ -17,6 +18,7 @@ public class ZombieNavMesh : MonoBehaviour
     void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,6 +27,19 @@ public class ZombieNavMesh : MonoBehaviour
         if (player != null)
         {
             navMeshAgent.destination = player.position;
+        }
+        HandleAnimation();
+    }
+
+    void HandleAnimation()
+    {
+        if (navMeshAgent.speed > 0)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
         }
     }
 }
