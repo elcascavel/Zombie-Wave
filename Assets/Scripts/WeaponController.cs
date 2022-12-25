@@ -30,43 +30,32 @@ public class WeaponController : MonoBehaviour
         bulletsInMagazine = magazineCapacity;
     }
 
-
-    void Update()
-    {
-        
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            Reload();
-        }
-        
-    }
-
     public void Shoot()
     {
-        if(hasAmmo)
+        if (hasAmmo)
+        {
+            if (canShoot)
             {
-                if(canShoot)
+                StartCoroutine(FireRateDelay());
+                Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+                bulletsInMagazine--;
+                Recoil_Script.RecoilFire();
+                if (bulletsInMagazine <= 0)
                 {
-                     StartCoroutine(FireRateDelay());
-                    Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-                    bulletsInMagazine--;
-                    Recoil_Script.RecoilFire();
-                    if(bulletsInMagazine <= 0)
+                    hasAmmo = false;
+                    if (automaticReload)
                     {
-                        hasAmmo = false;
-                        if(automaticReload)
-                        {
-                            Reload();
-                        }
-                     }
-                    
-                    Debug.Log("Magazine: " + bulletsInMagazine);
+                        Reload();
+                    }
                 }
+
+                Debug.Log("Magazine: " + bulletsInMagazine);
             }
-       
+        }
+
     }
 
-    void Reload()
+    public void Reload()
     {
         StartCoroutine(ReloadDelay());
     }

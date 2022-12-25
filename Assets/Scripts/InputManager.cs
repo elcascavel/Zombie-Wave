@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         onFoot.Jump.performed += ctx => motor.Jump();
         onFoot.Shoot.performed += ctx => weaponController.Shoot();
+        onFoot.Reload.performed += ctx => weaponController.Reload();
     }
 
     void Start()
