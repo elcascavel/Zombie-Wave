@@ -23,6 +23,7 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] bool automaticWeapon = false;
 
+    [SerializeField] private Recoil Recoil_Script;
 
     void Start()
     {
@@ -32,27 +33,6 @@ public class WeaponController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButton(0) && automaticWeapon)
-        {
-            if(hasAmmo)
-            {
-                if(canShoot)
-                {
-                    Shoot();
-                    Debug.Log("Magazine: " + bulletsInMagazine);
-                }
-            }
-           
-        } else if(Input.GetMouseButtonDown(0) && !automaticWeapon)
-            {
-                if(hasAmmo)
-                {
-                    if(canShoot)
-                    {
-                        Shoot();
-                    }
-                }
-            }
         
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -61,19 +41,29 @@ public class WeaponController : MonoBehaviour
         
     }
 
-    void Shoot()
+    public void Shoot()
     {
-        StartCoroutine(FireRateDelay());
-        Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bulletsInMagazine--;
-        if(bulletsInMagazine <= 0)
-        {
-            hasAmmo = false;
-            if(automaticReload)
+        if(hasAmmo)
             {
-                Reload();
+                if(canShoot)
+                {
+                     StartCoroutine(FireRateDelay());
+                    Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+                    bulletsInMagazine--;
+                    Recoil_Script.RecoilFire();
+                    if(bulletsInMagazine <= 0)
+                    {
+                        hasAmmo = false;
+                        if(automaticReload)
+                        {
+                            Reload();
+                        }
+                     }
+                    
+                    Debug.Log("Magazine: " + bulletsInMagazine);
+                }
             }
-        }
+       
     }
 
     void Reload()

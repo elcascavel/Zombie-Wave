@@ -12,13 +12,17 @@ public class InputManager : MonoBehaviour
 
     private PlayerLook look;
 
+    private WeaponController weaponController;
+
     void Awake()
     {
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+        weaponController = GetComponent<WeaponController>();
         onFoot.Jump.performed += ctx => motor.Jump();
+        onFoot.Shoot.performed += ctx => weaponController.Shoot();
     }
 
     void Start()
