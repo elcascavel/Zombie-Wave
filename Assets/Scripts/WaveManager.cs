@@ -16,6 +16,8 @@ public class WaveManager : MonoBehaviour
     private float waveTimer = 10f;
     private UIManager uiManager;
 
+    private bool waveObjectiveComplete;
+
     private bool waveStarted;
 
     public bool WaveStarted
@@ -61,7 +63,10 @@ public class WaveManager : MonoBehaviour
 
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
-        StartCoroutine(StartNextWave());
+        if (waveObjectiveComplete)
+        {
+            StartCoroutine(StartNextWave());
+        }
     }
 
     void UpdateWaveTimer()
