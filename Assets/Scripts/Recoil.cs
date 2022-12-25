@@ -14,12 +14,6 @@ public class Recoil : MonoBehaviour
     [SerializeField] private float snappiness;
     [SerializeField] private float returnSpeed;
 
-    void Start()
-    {
-        
-    }
-
-    
     void Update()
     {
         targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);

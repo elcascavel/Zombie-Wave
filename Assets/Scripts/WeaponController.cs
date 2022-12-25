@@ -23,7 +23,7 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] bool automaticWeapon = false;
 
-    [SerializeField] private Recoil Recoil_Script;
+    [SerializeField] private Recoil recoil;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class WeaponController : MonoBehaviour
                 StartCoroutine(FireRateDelay());
                 Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
                 bulletsInMagazine--;
-                Recoil_Script.RecoilFire();
+                recoil.RecoilFire();
                 if (bulletsInMagazine <= 0)
                 {
                     hasAmmo = false;
@@ -48,7 +48,6 @@ public class WeaponController : MonoBehaviour
                         Reload();
                     }
                 }
-
                 Debug.Log("Magazine: " + bulletsInMagazine);
             }
         }
