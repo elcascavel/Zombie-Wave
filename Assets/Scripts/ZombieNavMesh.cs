@@ -19,6 +19,8 @@ public class ZombieNavMesh : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        navMeshAgent.updateRotation = true;
     }
 
     // Update is called once per frame
@@ -28,18 +30,16 @@ public class ZombieNavMesh : MonoBehaviour
         {
             navMeshAgent.destination = player.position;
         }
+    }
+
+    void LateUpdate()
+    {
         HandleAnimation();
     }
 
     void HandleAnimation()
     {
-        if (navMeshAgent.speed > 0)
-        {
-            animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
+        float speed = navMeshAgent.velocity.magnitude;
+        animator.SetFloat("speed", speed);
     }
 }
