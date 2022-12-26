@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 95496151978713162}
   - component: {fileID: 7069497827200627439}
   - component: {fileID: -6893921336926098857}
+  - component: {fileID: 6208913047354326534}
   m_Layer: 0
   m_Name: SM_Chr_Zombie_Female_01
   m_TagString: Untagged
@@ -183,6 +184,20 @@ NavMeshAgent:
   m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6208913047354326534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015224441584018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a74d5c5800aff41b50ac1cd1f2c513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decalPrefab: {fileID: 9154229115824779020, guid: a5e1e2c4d2cd81f4abed6272a2b8187a, type: 3}
+  decalType: 3
 --- !u!1 &1015304274438944
 GameObject:
   m_ObjectHideFlags: 0

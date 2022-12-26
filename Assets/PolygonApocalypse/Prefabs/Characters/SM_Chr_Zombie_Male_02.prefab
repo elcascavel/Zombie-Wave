@@ -1608,6 +1608,7 @@ GameObject:
   - component: {fileID: 95645709749005162}
   - component: {fileID: -2896427516756588690}
   - component: {fileID: 507043675493418528}
+  - component: {fileID: 4624457711025585327}
   m_Layer: 0
   m_Name: SM_Chr_Zombie_Male_02
   m_TagString: Untagged
@@ -1717,6 +1718,20 @@ NavMeshAgent:
   m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &4624457711025585327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331328711462180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a74d5c5800aff41b50ac1cd1f2c513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decalPrefab: {fileID: 9154229115824779020, guid: a5e1e2c4d2cd81f4abed6272a2b8187a, type: 3}
+  decalType: 3
 --- !u!1 &1387526774068968
 GameObject:
   m_ObjectHideFlags: 0
