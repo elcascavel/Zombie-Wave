@@ -14,7 +14,6 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float reloadTime = 2f;
     [SerializeField] float fireRateDelay = 0.5f;
     [SerializeField] bool automaticWeapon = false;
-    [SerializeField] private Recoil recoil;
     [SerializeField] private ParticleSystem shootingSystem;
     [SerializeField] private TrailRenderer bulletTrail;
     [SerializeField] private LayerMask Mask;
@@ -50,7 +49,19 @@ public class WeaponController : MonoBehaviour
 
     private Vector3 GetDirection()
     {
-        Vector3 direction = bulletSpawnPoint.forward;
+        Vector3 direction = transform.forward;
+
+        if (addBulletSpread)
+        {
+            direction += new Vector3(
+                Random.Range(-bulletSpreadVariance.x, bulletSpreadVariance.x),
+                Random.Range(-bulletSpreadVariance.y, bulletSpreadVariance.y),
+                Random.Range(-bulletSpreadVariance.z, bulletSpreadVariance.z)
+            );
+
+            direction.Normalize();
+        }
+
         return direction;
     }
 
