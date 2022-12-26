@@ -5291,6 +5291,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.0000024, y: 0, z: 5.0000024}
   m_Center: {x: -2.5000012, y: 0.000000007450581, z: -2.500003}
+--- !u!4 &1167939532 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6867469909841202179, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+  m_PrefabInstance: {fileID: 1369493947549223706}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1167939534 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6737707363529686349, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+  m_PrefabInstance: {fileID: 1369493947549223706}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1169411808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8326,11 +8336,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.0000024, y: 0, z: 5.0000024}
   m_Center: {x: -2.5000012, y: 0.000000007450581, z: -2.500003}
---- !u!4 &1847462712 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1369493946977615906, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
-  m_PrefabInstance: {fileID: 1369493947549223706}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1850787587 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1369493946981993497, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
@@ -8354,13 +8359,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1551417492572840, guid: 79ea69f034f719f408ef7420f8bfb7d8, type: 3}
-  bulletSpawnPoint: {fileID: 1847462712}
+  bulletSpawnPoint: {fileID: 1167939532}
   magazineCapacity: 30
   reloadTime: 2
   fireRateDelay: 0.1
   automaticReload: 0
   automaticWeapon: 1
   recoil: {fileID: 77786572}
+  shootingSystem: {fileID: 1167939534}
+  bulletTrail: {fileID: 328621789431213768, guid: 43559d27d223bf340b413fde1315c256, type: 3}
+  Mask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1001 &1861803370
 PrefabInstance:
   m_ObjectHideFlags: 0

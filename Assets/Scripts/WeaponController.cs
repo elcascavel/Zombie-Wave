@@ -4,74 +4,77 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField]
+    private bool addBulletSpread = true;
+    [SerializeField]
+    private Vector3 bulletSpreadVariance = new Vector3(0.1f, 0.1f, 0.1f);
+    [SerializeField]
+    private ParticleSystem impactParticleSystem;
     [SerializeField] Transform bulletSpawnPoint;
-
-    [SerializeField] int magazineCapacity = 30;
-    int bulletsInMagazine;
-
     [SerializeField] float reloadTime = 2f;
-
-    [SerializeField] float fireRateDelay = 0.1f;
-
-    bool canShoot = true;
-
-    bool hasAmmo = true;
-
-    [SerializeField] bool automaticReload = false;
-
+    [SerializeField] float fireRateDelay = 0.5f;
     [SerializeField] bool automaticWeapon = false;
-
     [SerializeField] private Recoil recoil;
+    [SerializeField] private ParticleSystem shootingSystem;
+    [SerializeField] private TrailRenderer bulletTrail;
+    [SerializeField] private LayerMask Mask;
 
-    void Start()
-    {
-        bulletsInMagazine = magazineCapacity;
-    }
+    [SerializeField]
+    private float bulletSpeed = 100;
+
+    private float lastShootTime;
 
     public void Shoot()
     {
-        if (hasAmmo)
+        if (lastShootTime + fireRateDelay < Time.time)
         {
-            if (canShoot)
+            shootingSystem.Play();
+            Vector3 direction = GetDirection();
+
+            if (Physics.Raycast(bulletSpawnPoint.position, direction, out RaycastHit hit, float.MaxValue, Mask))
             {
-                StartCoroutine(FireRateDelay());
-                Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-                bulletsInMagazine--;
-                recoil.RecoilFire();
-                if (bulletsInMagazine <= 0)
-                {
-                    hasAmmo = false;
-                    if (automaticReload)
-                    {
-                        Reload();
-                    }
-                }
-                Debug.Log("Magazine: " + bulletsInMagazine);
+                TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                lastShootTime = Time.time;
+            }
+            else
+            {
+                TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
+
+                StartCoroutine(SpawnTrail(trail, bulletSpawnPoint.position + GetDirection() * 100, Vector3.zero, false));
+
+                lastShootTime = Time.time;
             }
         }
-
     }
 
-    public void Reload()
+    private Vector3 GetDirection()
     {
-        StartCoroutine(ReloadDelay());
+        Vector3 direction = bulletSpawnPoint.forward;
+        return direction;
     }
 
-    IEnumerator FireRateDelay()
+    private IEnumerator SpawnTrail(TrailRenderer trail, Vector3 hitPoint, Vector3 hitNormal, bool madeImpact)
     {
-        canShoot = false;
-        yield return new WaitForSeconds(fireRateDelay);
-        canShoot = true;
-    }
+        Vector3 startPosition = trail.transform.position;
+        float distance = Vector3.Distance(trail.transform.position, hitPoint);
+        float remainingDistance = distance;
 
-    IEnumerator ReloadDelay()
-    {
-        canShoot = false;
-        yield return new WaitForSeconds(reloadTime);
-        bulletsInMagazine = magazineCapacity;
-        hasAmmo = true;
-        canShoot = true;
+        while (remainingDistance > 0)
+        {
+            trail.transform.position = Vector3.Lerp(startPosition, hitPoint, 1 - (remainingDistance / distance));
+
+            remainingDistance -= bulletSpeed * Time.deltaTime;
+
+            yield return null;
+        }
+        //Animator.SetBool("IsShooting", false);
+        trail.transform.position = hitPoint;
+        if (madeImpact)
+        {
+            Instantiate(impactParticleSystem, hitPoint, Quaternion.LookRotation(hitNormal));
+        }
+
+        Destroy(trail.gameObject, trail.time);
     }
 }
