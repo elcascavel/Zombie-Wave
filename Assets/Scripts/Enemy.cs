@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieNavMesh : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;
     [SerializeField] private Transform player = null;
     [SerializeField] private Animator animator = null;
+    [SerializeField] private EnemyHealth health;
+
+    [SerializeField] private CharacterController controller;
 
     public Transform Player
     {
@@ -19,8 +22,24 @@ public class ZombieNavMesh : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        health = GetComponent<EnemyHealth>();
+        controller = GetComponent<CharacterController>();
 
         navMeshAgent.updateRotation = true;
+    }
+
+    private void Start()
+    {
+        health.onDeath += Die;
+    }
+
+    private void Die(Vector3 position)
+    {
+        animator.SetTrigger("die");
+        controller.enabled = false;
+        navMeshAgent.isStopped = true;
+
+        Destroy(gameObject, 10f);
     }
 
     // Update is called once per frame

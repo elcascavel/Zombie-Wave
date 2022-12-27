@@ -11,6 +11,8 @@ public class WeaponScriptableObject : ScriptableObject
     public GameObject modelPrefab;
     public Vector3 spawnPoint;
     public Vector3 spawnRotation;
+
+    public DamageConfigScriptableObject damageConfig;
     public ShootConfigurationScriptableObject shootConfig;
     public TrailConfigScriptableObject trailConfig;
     private MonoBehaviour activeMonoBehaviour;
@@ -100,6 +102,14 @@ public class WeaponScriptableObject : ScriptableObject
         }
 
         instance.transform.position = endPoint;
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(damageConfig.GetDamage(distance));
+            }
+        }
 
         yield return new WaitForSeconds(trailConfig.duration);
         yield return null;

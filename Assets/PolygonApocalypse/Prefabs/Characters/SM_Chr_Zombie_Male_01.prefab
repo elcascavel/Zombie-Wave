@@ -772,8 +772,10 @@ GameObject:
   - component: {fileID: 4507433646410060}
   - component: {fileID: 95982432595508516}
   - component: {fileID: -3752578199279473082}
+  - component: {fileID: 9191438813093865339}
   - component: {fileID: 7744977902498086431}
   - component: {fileID: 3064596436003275341}
+  - component: {fileID: -2191102972725714385}
   m_Layer: 0
   m_Name: SM_Chr_Zombie_Male_01
   m_TagString: Untagged
@@ -861,6 +863,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   animator: {fileID: 0}
+  health: {fileID: 1395392579913816645, guid: 807784d16a875e0499c116c9506424aa, type: 3}
+--- !u!114 &9191438813093865339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187010538823314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c51f36c50f717c409d544bea2b88e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Health: 0
+  _MaxHealth: 100
 --- !u!195 &7744977902498086431
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -897,6 +914,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decalPrefab: {fileID: 9154229115824779020, guid: a5e1e2c4d2cd81f4abed6272a2b8187a, type: 3}
   decalType: 3
+--- !u!143 &-2191102972725714385
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187010538823314}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.29
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.91, z: 0}
 --- !u!1 &1195061267236796
 GameObject:
   m_ObjectHideFlags: 0

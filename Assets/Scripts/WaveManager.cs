@@ -59,7 +59,7 @@ public class WaveManager : MonoBehaviour
             int randomSpawnPoint = Random.Range(0, spawnPoints.Length);
 
             spawnedEnemies.Add(Instantiate(enemies[randomEnemy], spawnPoints[randomSpawnPoint].position, Quaternion.identity));
-            spawnedEnemies[i].GetComponent<ZombieNavMesh>().Player = player;
+            spawnedEnemies[i].GetComponent<Enemy>().Player = player;
 
             yield return new WaitForSeconds(timeBetweenSpawns);
         }
