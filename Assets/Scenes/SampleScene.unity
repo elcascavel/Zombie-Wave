@@ -306,28 +306,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1933337508412642, guid: e03c8f6e23f5f52458f31334315bf803, type: 3}
   m_PrefabInstance: {fileID: 1805651418}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &77786570 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2797711397656519549, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
-  m_PrefabInstance: {fileID: 1369493947549223706}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &77786572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77786570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf3cb43db9541284b92f37ed13a6e173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recoilX: -2
-  recoilY: 2
-  recoilZ: 0.35
-  snappiness: 6
-  returnSpeed: 2
 --- !u!1001 &92742415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5744,16 +5722,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decalPrefab: {fileID: 9154229115824779020, guid: a5e1e2c4d2cd81f4abed6272a2b8187a, type: 3}
   decalType: 1
---- !u!4 &1167939532 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6867469909841202179, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
-  m_PrefabInstance: {fileID: 1369493947549223706}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1167939534 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6737707363529686349, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
-  m_PrefabInstance: {fileID: 1369493947549223706}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1169411808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9289,32 +9257,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1369493946981993493, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
   m_PrefabInstance: {fileID: 1369493947549223706}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1850787604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850787587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3ea594b4f7972d449e9197596c2cda1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  addBulletSpread: 1
-  bulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
-  impactParticleSystem: {fileID: 9064919875212695174, guid: a5e1e2c4d2cd81f4abed6272a2b8187a, type: 3}
-  bulletSpawnPoint: {fileID: 1167939532}
-  reloadTime: 2
-  fireRateDelay: 0.1
-  automaticWeapon: 1
-  recoil: {fileID: 77786572}
-  shootingSystem: {fileID: 1167939534}
-  bulletTrail: {fileID: 328621789431213768, guid: 43559d27d223bf340b413fde1315c256, type: 3}
-  Mask:
-    serializedVersion: 2
-    m_Bits: 1
-  bulletSpeed: 100
 --- !u!1001 &1861803370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11783,20 +11725,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1369493946408716607, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 1369493946519106268, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1369493946408716607, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 1551417492572840, guid: 79ea69f034f719f408ef7420f8bfb7d8, type: 3}
-    - target: {fileID: 1369493946408716607, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
-      propertyPath: Recoil_Script
-      value: 
-      objectReference: {fileID: 77786572}
-    - target: {fileID: 1369493946408716607, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
-      propertyPath: automaticWeapon
+    - target: {fileID: 1369493946981993491, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1369493946981993493, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
@@ -11847,6 +11781,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5864930367998228690, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+      propertyPath: BulletTrail
+      value: 
+      objectReference: {fileID: 328621789431213768, guid: 43559d27d223bf340b413fde1315c256, type: 3}
+    - target: {fileID: 5864930367998228690, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+      propertyPath: ShootingSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864930367998228690, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+      propertyPath: BulletSpawnPoint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864930367998228690, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+      propertyPath: ImpactParticleSystem
+      value: 
+      objectReference: {fileID: 9064919875212695174, guid: a5e1e2c4d2cd81f4abed6272a2b8187a, type: 3}
+    - target: {fileID: 8752706569275558313, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 1369493946408716607, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
+    - {fileID: 5864930367998228690, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1af960c22bdc7b649b9b4a5e965d282e, type: 3}

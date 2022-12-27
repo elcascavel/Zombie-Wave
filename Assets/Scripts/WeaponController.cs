@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -74,6 +73,7 @@ public class WeaponController : MonoBehaviour
         while (remainingDistance > 0)
         {
             trail.transform.position = Vector3.Lerp(startPosition, hitPoint, 1 - (remainingDistance / distance));
+            Debug.Log(trail.transform.position);
 
             remainingDistance -= bulletSpeed * Time.deltaTime;
 

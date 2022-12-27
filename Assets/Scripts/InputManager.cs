@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
 
     private PlayerLook look;
 
-    private WeaponController weaponController;
+    private PlayerWeaponSelector playerWeaponSelector;
 
     void Awake()
     {
@@ -20,9 +20,9 @@ public class InputManager : MonoBehaviour
         onFoot = playerInput.OnFoot;
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
-        weaponController = GetComponent<WeaponController>();
+        playerWeaponSelector = GetComponent<PlayerWeaponSelector>();
         onFoot.Jump.performed += ctx => motor.Jump();
-        onFoot.Shoot.performed += ctx => weaponController.Shoot();
+        onFoot.Shoot.performed += ctx => playerWeaponSelector.activeWeapon.Shoot();
         //onFoot.Reload.performed += ctx => weaponController.Reload();
     }
 
