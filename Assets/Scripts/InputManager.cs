@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +12,8 @@ public class InputManager : MonoBehaviour
 
     private PlayerWeaponSelector playerWeaponSelector;
 
+    bool pressed = false;
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -22,8 +22,22 @@ public class InputManager : MonoBehaviour
         look = GetComponent<PlayerLook>();
         playerWeaponSelector = GetComponent<PlayerWeaponSelector>();
         onFoot.Jump.performed += ctx => motor.Jump();
-        onFoot.Shoot.performed += ctx => playerWeaponSelector.activeWeapon.Shoot();
+        onFoot.Shoot.performed += ctx => pressed = true;
+        onFoot.Shoot.canceled += ctx => pressed = false;
         //onFoot.Reload.performed += ctx => weaponController.Reload();
+    }
+
+    void Update()
+    {
+        OnShoot();
+    }
+
+    void OnShoot()
+    {
+        if (pressed)
+        {
+            playerWeaponSelector.activeWeapon.Shoot();
+        }
     }
 
     void Start()
