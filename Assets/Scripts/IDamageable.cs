@@ -9,9 +9,7 @@ public interface IDamageable
 
     public delegate void TakeDamageEvent(int damage);
     public event TakeDamageEvent onTakeDamage;
-
     public delegate void DeathEvent(Vector3 position);
     public event DeathEvent onDeath;
-
     public void TakeDamage(int damage);
 }

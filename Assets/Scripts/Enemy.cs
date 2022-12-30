@@ -9,14 +9,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform player = null;
     [SerializeField] private Animator animator = null;
     [SerializeField] private EnemyHealth health;
-
     [SerializeField] private CharacterController controller;
+    public WaveManager waveManager;
 
     public Transform Player
     {
         get { return player; }
         set { player = value; }
     }
+
+    public bool isDead;
 
     void Awake()
     {
@@ -38,8 +40,7 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("die");
         controller.enabled = false;
         navMeshAgent.isStopped = true;
-
-        Destroy(gameObject, 10f);
+        isDead = true;
     }
 
     // Update is called once per frame
