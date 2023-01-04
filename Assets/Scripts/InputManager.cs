@@ -5,14 +5,12 @@ public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
     private PlayerInput.OnFootActions onFoot;
-
     private PlayerMotor motor;
-
     private PlayerLook look;
-
     private PlayerWeaponSelector playerWeaponSelector;
-
+    private bool isReloading;
     bool pressed = false;
+    bool reloadPressed = false;
 
     void Awake()
     {
@@ -22,14 +20,43 @@ public class InputManager : MonoBehaviour
         look = GetComponent<PlayerLook>();
         playerWeaponSelector = GetComponent<PlayerWeaponSelector>();
         onFoot.Jump.performed += ctx => motor.Jump();
+
         onFoot.Shoot.performed += ctx => pressed = true;
         onFoot.Shoot.canceled += ctx => pressed = false;
-        //onFoot.Reload.performed += ctx => weaponController.Reload();
+
+        onFoot.Reload.performed += ctx => reloadPressed = true;
+        onFoot.Reload.canceled += ctx => reloadPressed = false;
     }
 
     void Update()
     {
-        OnShoot();
+        playerWeaponSelector.activeWeapon.Tick(
+            !isReloading
+            && Application.isFocused && pressed
+            && playerWeaponSelector.activeWeapon != null
+        );
+
+        if (ShouldManualReload())
+        {
+            isReloading = true;
+            Debug.Log("Reloading");
+        }
+        else
+        {
+            OnShoot();
+        }
+    }
+
+    private bool ShouldManualReload()
+    {
+        return !isReloading && reloadPressed && playerWeaponSelector.activeWeapon.CanReload();
+    }
+
+    private void EndReload()
+    {
+        playerWeaponSelector.activeWeapon.EndReload();
+        isReloading = false;
+        Debug.Log("Reloaded");
     }
 
     void OnShoot()

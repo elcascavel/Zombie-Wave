@@ -12,6 +12,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private CharacterController controller;
     public WaveManager waveManager;
 
+    private float attackCooldown = 2f;
+
+    private float minimumAttackDistance = 3f;
+
+    private float lastAttackTime = 0;
+
     public Transform Player
     {
         get { return player; }
@@ -49,7 +55,37 @@ public class Enemy : MonoBehaviour
         if (player != null)
         {
             navMeshAgent.destination = player.position;
+            float distance = Vector3.Distance(navMeshAgent.transform.position, player.position);
+            Debug.Log(distance);
+
+            if (distance <= minimumAttackDistance)
+            {
+                StopEnemy();
+                if (Time.time - lastAttackTime >= attackCooldown)
+                {
+                    lastAttackTime = Time.time;
+                    animator.SetBool("isAttacking", true);
+                    float attackDamage = Random.Range(0, 10);
+                    player.GetComponent<PlayerStats>().TakeDamage(attackDamage);
+                }
+            }
+            else
+            {
+                animator.SetBool("isAttacking", false);
+                GoToTarget();
+            }
         }
+    }
+
+    void GoToTarget()
+    {
+        navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(player.position);
+    }
+
+    void StopEnemy()
+    {
+        navMeshAgent.isStopped = true;
     }
 
     void LateUpdate()

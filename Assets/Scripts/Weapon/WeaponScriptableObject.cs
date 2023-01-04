@@ -15,12 +15,16 @@ public class WeaponScriptableObject : ScriptableObject
     public DamageConfigScriptableObject damageConfig;
     public ShootConfigurationScriptableObject shootConfig;
     public TrailConfigScriptableObject trailConfig;
+    public AmmoConfigScriptableObject ammoConfig;
     private MonoBehaviour activeMonoBehaviour;
 
     private GameObject model;
     private float lastShootTime;
+    private float initialClickTime;
+    private float stopShootingTime;
     private ParticleSystem shootSystem;
     private ObjectPool<TrailRenderer> trailPool;
+    private bool lastFrameWantedToShoot;
 
     public void Spawn(Transform parent, MonoBehaviour activeMonoBehaviour)
     {
@@ -33,6 +37,34 @@ public class WeaponScriptableObject : ScriptableObject
         model.transform.localRotation = Quaternion.Euler(spawnRotation);
 
         shootSystem = model.GetComponentInChildren<ParticleSystem>();
+    }
+
+    public void Tick(bool wantsToShoot)
+    {
+        if (wantsToShoot)
+        {
+            lastFrameWantedToShoot = true;
+            if (ammoConfig.currentClipAmmo > 0)
+            {
+                Shoot();
+            }
+        }
+
+        if (!wantsToShoot && lastFrameWantedToShoot)
+        {
+            stopShootingTime = Time.time;
+            lastFrameWantedToShoot = false;
+        }
+    }
+
+    public void EndReload()
+    {
+        ammoConfig.Reload();
+    }
+
+    public bool CanReload()
+    {
+        return ammoConfig.CanReload();
     }
 
     public void Shoot()
@@ -51,6 +83,8 @@ public class WeaponScriptableObject : ScriptableObject
                 )
             );
             shootDirection.Normalize();
+
+            ammoConfig.currentClipAmmo--;
 
             if (Physics.Raycast(
                 shootSystem.transform.position,

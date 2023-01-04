@@ -20,3 +20,4 @@ MonoBehaviour:
   damageConfig: {fileID: 11400000, guid: f31175d043c389540b24745bf757d23d, type: 2}
   shootConfig: {fileID: 11400000, guid: a2e4d83931b6cf241b6c3b8d882b474c, type: 2}
   trailConfig: {fileID: 11400000, guid: 5c8f6efcaccc41042a88390aa93d2817, type: 2}
+  ammoConfig: {fileID: 11400000, guid: 548bc20ad3450e8408afece9018488f8, type: 2}
