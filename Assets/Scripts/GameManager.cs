@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         uiManager = GetComponent<UIManager>();
         waveManager = GetComponent<WaveManager>();
         playerStats = player.GetComponent<PlayerStats>();

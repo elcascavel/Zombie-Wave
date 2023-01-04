@@ -15,9 +15,6 @@ public class WaveManager : MonoBehaviour
     private int currentWave = 0;
     private float waveTimer = 10f;
     private UIManager uiManager;
-
-    private bool waveObjectiveComplete;
-
     private bool waveStarted;
 
     public bool WaveStarted
@@ -37,6 +34,25 @@ public class WaveManager : MonoBehaviour
         if (waveStarted)
         {
             UpdateWaveTimer();
+            CheckWaveObjective();
+        }
+    }
+
+    public void CheckWaveObjective()
+    {
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            if (spawnedEnemies[i].GetComponent<Enemy>().isDead)
+            {
+                Destroy(spawnedEnemies[i], 10f);
+                spawnedEnemies.RemoveAt(i);
+            }
+
+            if (spawnedEnemies.Count == 0 && enemiesSpawned == enemiesPerWave)
+            {
+                Debug.Log("Wave Complete");
+                StartCoroutine(StartNextWave());
+            }
         }
     }
 
@@ -49,7 +65,6 @@ public class WaveManager : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenWaves);
         StartCoroutine(SpawnEnemies());
     }
-
     IEnumerator SpawnEnemies()
     {
         for (int i = 0; i < enemiesPerWave; i++)
@@ -59,13 +74,9 @@ public class WaveManager : MonoBehaviour
             int randomSpawnPoint = Random.Range(0, spawnPoints.Length);
 
             spawnedEnemies.Add(Instantiate(enemies[randomEnemy], spawnPoints[randomSpawnPoint].position, Quaternion.identity));
-            spawnedEnemies[i].GetComponent<ZombieNavMesh>().Player = player;
+            spawnedEnemies[i].GetComponent<Enemy>().Player = player;
 
             yield return new WaitForSeconds(timeBetweenSpawns);
-        }
-        if (waveObjectiveComplete)
-        {
-            StartCoroutine(StartNextWave());
         }
     }
 
