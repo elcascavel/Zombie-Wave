@@ -23,4 +23,15 @@ public class PlayerStats : MonoBehaviour
             // Game over
         }
     }
+
+    public void Heal(float healPoints) 
+    {
+        Debug.Log("fired");
+        currentHealth = currentHealth + healPoints;
+
+        if(currentHealth > 100) 
+        {
+            currentHealth = 100;
+        }
+    }
 }

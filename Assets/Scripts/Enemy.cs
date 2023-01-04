@@ -56,7 +56,6 @@ public class Enemy : MonoBehaviour
         {
             navMeshAgent.destination = player.position;
             float distance = Vector3.Distance(navMeshAgent.transform.position, player.position);
-            Debug.Log(distance);
 
             if (distance <= minimumAttackDistance)
             {
