@@ -8,6 +8,7 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 playerVelocity;
     private bool isGrounded;
     private bool isRunning = false;
+    private bool isRegeneratingStamina = false;
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float speed = 5f;
@@ -38,7 +39,7 @@ public class PlayerMotor : MonoBehaviour
             playerVelocity.y = -2f;
         }
 
-        if (isRunning)
+        if (isRunning && !isRegeneratingStamina)
         {
             playerStats.DrainStamina(1);
             if (playerStats.CurrentStamina > 0)
@@ -55,7 +56,12 @@ public class PlayerMotor : MonoBehaviour
             controller.Move(playerVelocity * Time.deltaTime);
             if (playerStats.CurrentStamina < 100)
             {
+                isRegeneratingStamina = true;
                 playerStats.RegenerateStamina();
+            }
+            else if (playerStats.CurrentStamina >= 100)
+            {
+                isRegeneratingStamina = false;
             }
         }
     }
