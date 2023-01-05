@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     {
         animator.SetTrigger("die");
         controller.enabled = false;
-        navMeshAgent.isStopped = true;
+        StopEnemy();
         isDead = true;
     }
 

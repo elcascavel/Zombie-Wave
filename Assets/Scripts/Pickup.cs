@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
+    PlayerStats playerStats;
 
-    public void OnTriggerEnter(Collider other) 
+    private void Start()
     {
-        Debug.Log("collided");
-        gameManager.Player.GetComponent<PlayerStats>().Heal(100);
+        playerStats = GetComponent<PlayerStats>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("HealthKit"))
+        {
+            playerStats.Heal(100);
+        }
     }
 }

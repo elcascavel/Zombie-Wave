@@ -8,11 +8,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject waveText;
     [SerializeField] private GameObject waveTimer;
     [SerializeField] private Healthbar healthBar;
+    [SerializeField] private Healthbar staminaBar;
     private WaveManager waveManager;
 
     public Healthbar HealthBar
     {
         get { return healthBar; }
+    }
+
+    public Healthbar StaminaBar
+    {
+        get { return staminaBar; }
     }
 
     void Start()

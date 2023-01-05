@@ -24,12 +24,11 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void Heal(float healPoints) 
+    public void Heal(float healPoints)
     {
-        Debug.Log("fired");
         currentHealth = currentHealth + healPoints;
 
-        if(currentHealth > 100) 
+        if (currentHealth > 100)
         {
             currentHealth = 100;
         }
