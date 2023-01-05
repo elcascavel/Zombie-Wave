@@ -61,5 +61,6 @@ public class GameManager : MonoBehaviour
             StartGame();
         }
         uiManager.HealthBar.SetHealth(playerStats.CurrentHealth);
+        uiManager.StaminaBar.SetStamina(playerStats.CurrentStamina);
     }
 }

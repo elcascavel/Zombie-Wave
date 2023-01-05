@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlayerMotor : MonoBehaviour
 {
     private CharacterController controller;
-
     private Vector3 playerVelocity;
     private bool isGrounded;
+    private bool isRunning = false;
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float jumpHeight = 1.5f;
-
     [SerializeField] private float speed = 5f;
+    public bool IsRunning { get => isRunning; set => isRunning = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +35,15 @@ public class PlayerMotor : MonoBehaviour
         {
             playerVelocity.y = -2f;
         }
-        controller.Move(playerVelocity * Time.deltaTime);
+
+        if (isRunning)
+        {
+            controller.Move(transform.TransformDirection(moveDirection) * speed * 2 * Time.deltaTime);
+        }
+        else
+        {
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
     }
 
     public void Jump()

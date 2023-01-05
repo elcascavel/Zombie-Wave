@@ -21,6 +21,9 @@ public class InputManager : MonoBehaviour
         playerWeaponSelector = GetComponent<PlayerWeaponSelector>();
         onFoot.Jump.performed += ctx => motor.Jump();
 
+        onFoot.Run.performed += ctx => motor.IsRunning = true;
+        onFoot.Run.canceled += ctx => motor.IsRunning = false;
+
         onFoot.Shoot.performed += ctx => pressed = true;
         onFoot.Shoot.canceled += ctx => pressed = false;
 
