@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject waveTimer;
     [SerializeField] private Healthbar healthBar;
     [SerializeField] private Healthbar staminaBar;
+
     private WaveManager waveManager;
 
     public Healthbar HealthBar
@@ -51,5 +51,15 @@ public class UIManager : MonoBehaviour
     public void SetWaveTimerText(float time)
     {
         waveTimer.GetComponent<TMPro.TextMeshProUGUI>().text = time.ToString();
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
