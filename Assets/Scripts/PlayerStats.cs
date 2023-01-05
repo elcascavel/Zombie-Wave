@@ -49,12 +49,8 @@ public class PlayerStats : MonoBehaviour
         currentStamina -= staminaDrain;
     }
 
-    IEnumerator RegenerateStamina()
+    public void RegenerateStamina()
     {
-        while (currentStamina < maxStamina)
-        {
-            currentStamina += 1;
-            yield return new WaitForSeconds(1);
-        }
+        currentStamina += (20 * Time.deltaTime);
     }
 }

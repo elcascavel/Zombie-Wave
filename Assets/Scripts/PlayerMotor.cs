@@ -12,6 +12,8 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float speed = 5f;
     public bool IsRunning { get => isRunning; set => isRunning = value; }
+
+    public PlayerStats playerStats;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,11 +40,23 @@ public class PlayerMotor : MonoBehaviour
 
         if (isRunning)
         {
-            controller.Move(transform.TransformDirection(moveDirection) * speed * 2 * Time.deltaTime);
+            playerStats.DrainStamina(1);
+            if (playerStats.CurrentStamina > 0)
+            {
+                controller.Move(transform.TransformDirection(moveDirection) * speed * 2 * Time.deltaTime);
+            }
+            else
+            {
+                isRunning = false;
+            }
         }
         else
         {
             controller.Move(playerVelocity * Time.deltaTime);
+            if (playerStats.CurrentStamina < 100)
+            {
+                playerStats.RegenerateStamina();
+            }
         }
     }
 
