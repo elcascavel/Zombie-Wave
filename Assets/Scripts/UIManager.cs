@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject waveTimer;
     [SerializeField] private Healthbar healthBar;
     [SerializeField] private Healthbar staminaBar;
+    public GameObject deathScreen;
 
     private WaveManager waveManager;
 

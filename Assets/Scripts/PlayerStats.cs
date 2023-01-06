@@ -10,6 +10,12 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private float currentStamina = 100;
 
+    [SerializeField] private InputManager inputManager;
+
+    [SerializeField] private UIManager uiManager;
+
+    private float regenRate = 20;
+
     public float CurrentHealth
     {
         get => currentHealth;
@@ -31,7 +37,10 @@ public class PlayerStats : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            // Game over
+            inputManager.onDisable();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            uiManager.deathScreen.SetActive(true);
         }
     }
 
@@ -39,9 +48,9 @@ public class PlayerStats : MonoBehaviour
     {
         currentHealth = currentHealth + healPoints;
 
-        if (currentHealth > 100)
+        if (currentHealth > maxHealth)
         {
-            currentHealth = 100;
+            currentHealth = maxHealth;
         }
     }
     public void DrainStamina(float staminaDrain)
@@ -51,6 +60,6 @@ public class PlayerStats : MonoBehaviour
 
     public void RegenerateStamina()
     {
-        currentStamina += (20 * Time.deltaTime);
+        currentStamina += (regenRate * Time.deltaTime);
     }
 }
