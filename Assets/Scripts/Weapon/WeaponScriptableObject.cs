@@ -71,42 +71,46 @@ public class WeaponScriptableObject : ScriptableObject
     {
         if (Time.time > shootConfig.fireRate + lastShootTime)
         {
-            lastShootTime = Time.time;
-            shootSystem.Play();
-            Vector3 shootDirection = shootSystem.transform.forward
-            + new Vector3(
-                Random.Range(-shootConfig.spread.x, shootConfig.spread.x
-                ),
-                Random.Range(-shootConfig.spread.y, shootConfig.spread.y
-                ),
-                Random.Range(-shootConfig.spread.z, shootConfig.spread.z
-                )
-            );
-            shootDirection.Normalize();
-
-            ammoConfig.currentClipAmmo--;
-
-            if (Physics.Raycast(
-                shootSystem.transform.position,
-                shootDirection,
-                out RaycastHit hit,
-                float.MaxValue,
-                shootConfig.hitMask
-            ))
+            if (ammoConfig.currentClipAmmo > 0)
             {
-                activeMonoBehaviour.StartCoroutine(PlayTrail(
+                lastShootTime = Time.time;
+                shootSystem.Play();
+                Vector3 shootDirection = shootSystem.transform.forward
+                + new Vector3(
+                    Random.Range(-shootConfig.spread.x, shootConfig.spread.x
+                    ),
+                    Random.Range(-shootConfig.spread.y, shootConfig.spread.y
+                    ),
+                    Random.Range(-shootConfig.spread.z, shootConfig.spread.z
+                    )
+                );
+                shootDirection.Normalize();
+
+
+                ammoConfig.currentClipAmmo--;
+
+                if (Physics.Raycast(
                     shootSystem.transform.position,
-                    hit.point,
-                    hit
-                ));
-            }
-            else
-            {
-                activeMonoBehaviour.StartCoroutine(PlayTrail(
-                    shootSystem.transform.position,
-                    shootSystem.transform.position + (shootDirection * trailConfig.missDistance),
-                    new RaycastHit()
-                ));
+                    shootDirection,
+                    out RaycastHit hit,
+                    float.MaxValue,
+                    shootConfig.hitMask
+                ))
+                {
+                    activeMonoBehaviour.StartCoroutine(PlayTrail(
+                        shootSystem.transform.position,
+                        hit.point,
+                        hit
+                    ));
+                }
+                else
+                {
+                    activeMonoBehaviour.StartCoroutine(PlayTrail(
+                        shootSystem.transform.position,
+                        shootSystem.transform.position + (shootDirection * trailConfig.missDistance),
+                        new RaycastHit()
+                    ));
+                }
             }
         }
     }

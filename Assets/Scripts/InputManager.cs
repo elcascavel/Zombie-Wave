@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
     private PlayerWeaponSelector playerWeaponSelector;
-    private bool isReloading;
+    private bool isReloading = false;
     bool pressed = false;
     bool reloadPressed = false;
 
@@ -43,6 +43,7 @@ public class InputManager : MonoBehaviour
         {
             isReloading = true;
             Debug.Log("Reloading");
+            EndReload();
         }
         else
         {
@@ -59,7 +60,6 @@ public class InputManager : MonoBehaviour
     {
         playerWeaponSelector.activeWeapon.EndReload();
         isReloading = false;
-        Debug.Log("Reloaded");
     }
 
     void OnShoot()

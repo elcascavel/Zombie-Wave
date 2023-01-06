@@ -5,7 +5,6 @@ public class AmmoConfigScriptableObject : ScriptableObject
 {
     public int maxAmmo = 120;
     public int clipSize = 30;
-
     public int currentAmmo = 120;
     public int currentClipAmmo = 30;
 
@@ -21,6 +20,6 @@ public class AmmoConfigScriptableObject : ScriptableObject
 
     public bool CanReload()
     {
-        return currentAmmo < clipSize && currentAmmo > 0;
+        return currentClipAmmo < clipSize && currentAmmo > 0;
     }
 }

@@ -3,12 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject wavePanel;
     [SerializeField] private GameObject waveText;
     [SerializeField] private GameObject waveTimer;
+    [SerializeField] private GameObject ammoText;
     [SerializeField] private Healthbar healthBar;
     [SerializeField] private Healthbar staminaBar;
     public GameObject deathScreen;
+
+    [SerializeField] private AmmoConfigScriptableObject ammoConfig;
 
     private WaveManager waveManager;
 
@@ -25,6 +27,17 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         waveManager = GetComponent<WaveManager>();
+        SetAmmoText();
+    }
+
+    void Update()
+    {
+        SetAmmoText();
+    }
+
+    public void SetAmmoText()
+    {
+        ammoText.GetComponent<TMPro.TextMeshProUGUI>().text = ammoConfig.currentClipAmmo.ToString() + "/" + ammoConfig.currentAmmo.ToString();
     }
 
     public void ShowWaveText()
