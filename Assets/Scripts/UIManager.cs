@@ -59,6 +59,11 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void ExitGame()
     {
         Application.Quit();

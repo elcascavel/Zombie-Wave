@@ -17,6 +17,15 @@ public class WaveManager : MonoBehaviour
     private UIManager uiManager;
     private bool waveStarted;
 
+    private bool bunker = false;
+
+    private const int WAVE_MAX = 2;
+
+    public bool Bunker
+    {
+        get => bunker;
+    }
+
     public bool WaveStarted
     {
         get => waveStarted;
@@ -50,8 +59,14 @@ public class WaveManager : MonoBehaviour
 
             if (spawnedEnemies.Count == 0 && enemiesSpawned == enemiesPerWave)
             {
-                Debug.Log("Wave Complete");
-                StartCoroutine(StartNextWave());
+                if (currentWave == WAVE_MAX)
+                {
+                    bunker = true;
+                }
+                else
+                {
+                    StartCoroutine(StartNextWave());
+                }
             }
         }
     }
