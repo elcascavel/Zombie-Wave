@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private bool gameStarted;
 
-    private float gamePreparationTime = 2f;
+    private float gamePreparationTime = 20f;
 
     public GameObject Player
     {

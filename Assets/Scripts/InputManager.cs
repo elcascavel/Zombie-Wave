@@ -42,7 +42,6 @@ public class InputManager : MonoBehaviour
         if (ShouldManualReload())
         {
             isReloading = true;
-            Debug.Log("Reloading");
             EndReload();
         }
         else

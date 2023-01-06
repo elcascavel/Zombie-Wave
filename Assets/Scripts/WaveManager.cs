@@ -8,8 +8,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private List<GameObject> spawnedEnemies;
     [SerializeField] private Transform player;
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private float timeBetweenSpawns = 0.5f;
+    [SerializeField] private float timeBetweenWaves = 10f;
+    [SerializeField] private float timeBetweenSpawns = 0.1f;
     [SerializeField] private int enemiesPerWave = 10;
     private int enemiesSpawned = 0;
     private int currentWave = 0;
@@ -19,7 +19,7 @@ public class WaveManager : MonoBehaviour
 
     private bool bunker = false;
 
-    private const int WAVE_MAX = 2;
+    private const int WAVE_MAX = 5;
 
     public bool Bunker
     {

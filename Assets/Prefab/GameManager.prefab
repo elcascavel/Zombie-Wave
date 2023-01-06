@@ -59,11 +59,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d35393726ff8384a91ea4adb432c09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePanel: {fileID: 0}
   waveText: {fileID: 0}
   waveTimer: {fileID: 0}
+  ammoText: {fileID: 0}
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
+  deathScreen: {fileID: 0}
+  ammoConfig: {fileID: 11400000, guid: 548bc20ad3450e8408afece9018488f8, type: 2}
 --- !u!114 &9199163979411779843
 MonoBehaviour:
   m_ObjectHideFlags: 0

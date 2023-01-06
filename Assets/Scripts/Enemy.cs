@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
                     player.GetComponent<PlayerStats>().TakeDamage(attackDamage);
                 }
             }
-            else
+            else if (distance > minimumAttackDistance && !isDead)
             {
                 animator.SetBool("isAttacking", false);
                 GoToTarget();

@@ -5955,10 +5955,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 786254054}
     - target: {fileID: 9199163979411779842, guid: feefed36f233a4a40952cef8f92d10d4, type: 3}
-      propertyPath: ammoConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 548bc20ad3450e8408afece9018488f8, type: 2}
-    - target: {fileID: 9199163979411779842, guid: feefed36f233a4a40952cef8f92d10d4, type: 3}
       propertyPath: staminaBar
       value: 
       objectReference: {fileID: 70611953}
